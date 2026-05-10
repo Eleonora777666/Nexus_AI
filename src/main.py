@@ -54,4 +54,5 @@ def deploy():
 
 if __name__ == '__main__':
     # Start the development server in debug mode for easier troubleshooting
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
