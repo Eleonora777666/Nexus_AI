@@ -5,10 +5,14 @@ from flask import Flask, render_template, request, redirect
 # Initialize the Flask application
 app = Flask(__name__)
 
+# Force absolute path for Render server environment stability
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+DB_PATH = os.path.join(BASE_DIR, 'nexus_vault.db')
+
 # Database connection helper to handle SQLite interactions
 def get_db_connection():
-    # Connect to the local database file 'nexus_vault.db'
-    conn = sqlite3.connect('nexus_vault.db')
+    # Connect to the local database file via absolute path
+    conn = sqlite3.connect(DB_PATH)
     # Set the row factory to return dictionary-like Row objects
     conn.row_factory = sqlite3.Row
     return conn
